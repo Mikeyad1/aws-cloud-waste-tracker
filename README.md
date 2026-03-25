@@ -2,6 +2,9 @@
 
 Tool that scans AWS infrastructure and estimates potential monthly cloud waste. Results are shown as a single waste figure and a prioritized recommendation list, with detail on how estimates are derived.
 
+## Live Demo
+https://cloud-waste-tracker.onrender.com/Waste
+
 ## Features
 
 - Synthetic mode for UI and logic without AWS credentials; live scans when credentials are configured (EC2, S3, Lambda, Fargate, databases, Savings Plans, data transfer, and more).
