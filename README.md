@@ -5,6 +5,18 @@ Tool that scans AWS infrastructure and estimates potential monthly cloud waste. 
 ## Live Demo
 https://cloud-waste-tracker.onrender.com/Waste
 
+## Demo
+
+Watch a short walkthrough showing how to create the IAM role and run a scan:
+
+https://www.youtube.com/watch?v=QGm4EwpE0ds
+
+### Setup Screen
+![Setup screen](docs/setup_screen.png)
+
+### Waste Dashboard
+![Waste dashboard](docs/waste_screen.png)
+
 ## Features
 
 - Synthetic mode for UI and logic without AWS credentials; live scans when credentials are configured (EC2, S3, Lambda, Fargate, databases, Savings Plans, data transfer, and more).
