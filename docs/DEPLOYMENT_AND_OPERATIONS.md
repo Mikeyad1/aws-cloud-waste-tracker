@@ -9,7 +9,7 @@ The project is deployed as multiple Render components (web, worker, and cron) ba
 The Render build steps install dependencies and create DB tables:
 
 - `pip install -r requirements.txt`
-- `python create_tables.py`
+- `python scripts/create_tables.py`
 
 The web service starts the Streamlit UI:
 
@@ -40,5 +40,5 @@ At a minimum, production requires:
 - Render config: `render.yaml`
 - App start: `src/cwt_ui/app.py`
 - Worker runtime: `apps/worker/main.py`
-- DB tables init: `create_tables.py`
+- DB tables init: `scripts/create_tables.py`
 

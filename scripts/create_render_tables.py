@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """
 Create database tables directly on Render PostgreSQL
-Usage: python create_render_tables.py
+Usage: python scripts/create_render_tables.py
 """
 
 import os
 import sys
 from pathlib import Path
 
-# Add src to path
-REPO_ROOT = Path(__file__).resolve().parent
+# Add src to path (repo root is parent of this scripts/ directory)
+REPO_ROOT = Path(__file__).resolve().parent.parent
 SRC_DIR = REPO_ROOT / "src"
 if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))

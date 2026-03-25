@@ -3,7 +3,7 @@ services:
     name: cloud-waste-tracker
     env: python
     plan: free
-    buildCommand: pip install -r requirements.txt && python create_tables.py
+    buildCommand: pip install -r requirements.txt && python scripts/create_tables.py
     startCommand: streamlit run src/cwt_ui/app.py --server.port $PORT --server.address 0.0.0.0
     autoDeploy: true
     envVars:
@@ -26,7 +26,7 @@ services:
     name: cloud-waste-tracker-worker
     env: python
     plan: free
-    buildCommand: pip install -r requirements.txt && python create_tables.py
+    buildCommand: pip install -r requirements.txt && python scripts/create_tables.py
     startCommand: python apps/worker/main.py --region ${AWS_REGION:-us-east-1}
     autoDeploy: true
     envVars:
@@ -39,7 +39,7 @@ services:
     name: cloud-waste-tracker-scheduler
     env: python
     plan: free
-    buildCommand: pip install -r requirements.txt && python create_tables.py
+    buildCommand: pip install -r requirements.txt && python scripts/create_tables.py
     schedule: "0 * * * *"  # Run every hour
     startCommand: python apps/worker/main.py --region ${AWS_REGION:-us-east-1}
     envVars:
