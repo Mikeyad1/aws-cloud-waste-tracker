@@ -1,53 +1,50 @@
 # Cloud Waste Tracker
 
-Cloud Waste Tracker is a personal engineering project that scans AWS infrastructure and estimates potential monthly cloud waste. The app presents the result as a single "waste" number and a prioritized recommendation list, with drill-down into how each estimate is derived.
+Tool that scans AWS infrastructure and estimates potential monthly cloud waste. Results are shown as a single waste figure and a prioritized recommendation list, with detail on how estimates are derived.
 
-## Key capabilities
+## Features
 
-- **Synthetic mode**: explore the UI and recommendation logic without AWS credentials.
-- **Live scanning** (when AWS credentials are available): EC2, S3, Lambda, Fargate, Databases, Savings Plans, and data transfer.
-- **Action-focused output**: one waste number plus a ranked list of recommendations (with explanations per item).
-- **Persistence**: stores scan runs and normalized findings in a SQL database (PostgreSQL in production, SQLite for local/dev).
-- **Optional integration API**: feature-flagged FastAPI endpoints for health and scan data.
-- **Background execution**: worker + cron jobs for scheduled re-scans without blocking the UI.
+- Synthetic mode for UI and logic without AWS credentials; live scans when credentials are configured (EC2, S3, Lambda, Fargate, databases, Savings Plans, data transfer, and more).
+- Scan runs and findings persisted in PostgreSQL (production) or SQLite (local development).
+- Optional FastAPI endpoints (feature-flagged) and background workers/cron for scheduled scans.
 
-## Architecture overview
+## Architecture
 
-- **Web UI (Streamlit)**: `src/cwt_ui/app.py` and `src/cwt_ui/pages/*`
-- **Scan engine**: scanner modules in `src/scanners/*` and orchestration/services in `src/core/services/*` and `src/cwt_ui/services/*`
-- **Data model & persistence**: SQLAlchemy models in `src/db/models.py` and DB setup in `src/db/db.py`
-- **Optional backend (FastAPI)**: `src/api/main.py`
-- **Deployment topology**: `render.yaml` defines web, worker, and cron components
+| Layer | Location |
+|-------|----------|
+| Web UI (Streamlit) | `src/cwt_ui/app.py`, `src/cwt_ui/pages/` |
+| Scanners & orchestration | `src/scanners/`, `src/core/services/`, `src/cwt_ui/services/` |
+| Data layer | `src/db/models.py`, `src/db/db.py` |
+| Optional API | `src/api/main.py` |
+| Deployment | `render.yaml` (web, worker, cron) |
 
-## Tech stack
-
-- Python: Streamlit, FastAPI, SQLAlchemy, boto3, pandas
-- Database: PostgreSQL (production), SQLite (local/dev)
-- Deployment: Render
-- Optional Node.js: `tools/api_healthcheck.js` (example client for API health)
+Stack: Python (Streamlit, FastAPI, SQLAlchemy, boto3, pandas), PostgreSQL or SQLite, optional Node example at `tools/api_healthcheck.js`.
 
 ## Documentation
 
-- CV-ready project description: `docs/CV_PROJECT.md`
-- Architecture notes: `docs/SYSTEM_ARCHITECTURE.md`
-- Security overview: `docs/PRIVACY_AND_SECURITY.md`
+- [Architecture](docs/SYSTEM_ARCHITECTURE.md)
+- [Deployment and operations](docs/DEPLOYMENT_AND_OPERATIONS.md)
+- [Privacy and security](docs/PRIVACY_AND_SECURITY.md)
+- [AI-assisted development](AI_WORKFLOW.md)
 
-## Run the app locally
+## Run locally
 
-```bash
-streamlit run src/cwt_ui/app.py
-```
+1. Create a virtual environment (recommended) and install dependencies:
 
-## Run the API (optional)
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate   # Windows: .venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
 
-Set `FEATURE_API_ENDPOINTS=true` and then run:
+2. Start the app:
 
-```bash
-python run_api.py
-```
+   ```bash
+   streamlit run src/cwt_ui/app.py
+   ```
 
-## Run the worker (optional)
+**Optional — API:** set `FEATURE_API_ENDPOINTS=true`, then `python run_api.py`.
 
-```bash
-python apps/worker/main.py --region us-east-1
-```
+**Optional — worker:** `python apps/worker/main.py --region us-east-1` (requires AWS credentials in the environment).
+
+Production-style runs need `DATABASE_URL` and related settings as described in [Deployment and operations](docs/DEPLOYMENT_AND_OPERATIONS.md).
