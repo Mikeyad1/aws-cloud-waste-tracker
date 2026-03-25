@@ -1,0 +1,19 @@
+venv/ 
+__pycache__/ 
+*.pyc
+waste_report.csv
+s3_waste_report.csv
+*.png
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# Local development database
+local_dev.db
+*.db
+
+# Persisted UI state (resolved recommendations / wins)
+data/
+
+

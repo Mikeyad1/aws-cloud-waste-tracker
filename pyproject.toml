@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cloud-waste-tracker"
+version = "0.1.0"
+description = "Detect and reduce cloud waste (EC2/S3 etc.)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["boto3", "pandas", "streamlit"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
